@@ -19,7 +19,9 @@
     In SQL we can do it with just single query:
 
     Select [All students]
+
     Minus
+
     Select [Students enrolled in the given course]
 
     However, the Hibernate implementation of JPA does not support operation MINUS. (EclipseLink does with 'EXCEPT' keyword).
@@ -31,7 +33,7 @@
     PS. This is quick implementation that assumes all student names are unique (Which is not realistic). 
     A more correct implementation should rely on student id.
 
-3) The problem described in item 2) represents pros and cons of JPA: 
+4) The problem described in item 2) represents pros and cons of JPA: 
    On one hand you have an ORM tool to construct DB access code in a fast and portable way. 
    On the other hand JPQL language is limited when compared to plain SQL.
 
