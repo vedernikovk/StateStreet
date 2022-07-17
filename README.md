@@ -18,9 +18,9 @@
 
     In SQL we can do it with just single query:
 
-    Select <All students>
+    Select [All students]
     Minus
-    Select <Students enrolled in the given course>
+    Select [Students enrolled in the given course]
 
     However, the Hibernate implementation of JPA does not support operation MINUS. (EclipseLink does with 'EXCEPT' keyword).
 
