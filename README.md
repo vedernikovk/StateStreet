@@ -7,10 +7,10 @@
    
    2. Create a new entity class for the student_courses table (StudentCourseEntity)
    
-   3. Express a many-to-many relationship with two relationships:
+   3. Express the many-to-many relationship with two relationships:
    
-      One-to-Many: (StudentEntity(one) - to - StudentCourseEntity(many))
-      One-to-Many: (CourseEntity(one)  - to - StudentCourseEntity(many))
+      * One-to-Many: (StudentEntity(one) - to - StudentCourseEntity(many))
+      * One-to-Many: (CourseEntity(one)  - to - StudentCourseEntity(many))
    
 2) "How to find all students who don’t register for a given course"
     
