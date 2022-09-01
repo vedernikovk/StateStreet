@@ -9,7 +9,8 @@ public class StudentEntity {
 
     @Id
     @SequenceGenerator(name = "student_generator", sequenceName = "student_sequence", initialValue = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_generator")    private Long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_generator")
+    private Long id;
     private String name;
 
     @ManyToMany
