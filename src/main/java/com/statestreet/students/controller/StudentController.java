@@ -23,6 +23,12 @@ public class StudentController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @PutMapping(consumes = { "application/json" })
+    public ResponseEntity<Void> updateStudent(@RequestBody Student student) {
+        studentService.updateStudent(student);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @DeleteMapping(value = "{id}")
     public ResponseEntity<Void> deleteStudent(@PathVariable int id) throws StudentNotFoundException {
         studentService.deleteStudent(id);

@@ -14,6 +14,5 @@ public class PersonEntity {
 
     private String name;
 
-    @OneToMany
-    private List<IdDocument> idDocuments;
-}
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    private List<IdDocument> idDocuments;}

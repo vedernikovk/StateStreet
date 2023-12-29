@@ -24,15 +24,42 @@ class StudentServiceImpl implements StudentService {
         var newStudent = new StudentEntity();
         newStudent.setName(student.getName());
 
-        Set<CourseEntity> courses = student.getCourses().stream().map(id -> {
-            var course = new CourseEntity();
-            course.setId(id);
-            return course;
+        if (student.getCourses() != null) {
+            Set<CourseEntity> courses = student.getCourses().stream().map(id -> {
+                var course = new CourseEntity();
+                course.setId(id);
+                return course;
 
-        }).collect(Collectors.toSet());
+            }).collect(Collectors.toSet());
 
-        newStudent.setCourses(courses);
+            newStudent.setCourses(courses);
+        }
+
         em.persist(newStudent);
+    }
+
+    @Override
+    @Transactional
+    public void updateStudent(Student student) {
+        var studentEntity = em.find(StudentEntity.class, student.getId());
+
+        if (student.getCourses() != null) {
+            Set<CourseEntity> courses = student.getCourses().stream().map(id -> {
+                var course = new CourseEntity();
+                course.setId(id);
+                return course;
+
+            }).collect(Collectors.toSet());
+
+            studentEntity.setCourses(courses);
+        }
+
+        // Hibernate manages each side of a @ManyToMany relationship like a unidirectional
+        // @OneToMany association between the parent-side (e.g. Student or the Course) and the hidden
+        // child-side (e.g. the student_courses table student_id or course_id foreign keys). This is the reason why
+        // the entity removal or changing their order resulted in deleting all junction entries and
+        // reinserting them by mirroring the in-memory Persistence Context.
+        em.persist(studentEntity);
     }
 
     @Override

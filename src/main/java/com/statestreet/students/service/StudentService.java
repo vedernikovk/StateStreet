@@ -12,4 +12,6 @@ public interface StudentService {
     List<String> findEnrolledStudents(String courseName);
 
     List<String> findNotEnrolledStudents(String courseName);
+
+    void updateStudent(Student student);
 }

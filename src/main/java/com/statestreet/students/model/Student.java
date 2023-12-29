@@ -4,6 +4,8 @@ import java.util.List;
 
 public class Student {
 
+    private Long id;
+
     private String name;
     private List<Long> courses;
 
@@ -21,5 +23,13 @@ public class Student {
 
     public void setCourses(List<Long> courses) {
         this.courses = courses;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
