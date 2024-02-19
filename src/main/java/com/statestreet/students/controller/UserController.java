@@ -1,5 +1,7 @@
 package com.statestreet.students.controller;
 
+import com.statestreet.students.entity.one_to_one_bidirect.UserEntity;
+import com.statestreet.students.model.Address;
 import com.statestreet.students.model.Student;
 import com.statestreet.students.model.User;
 import com.statestreet.students.service.UserService;
@@ -27,6 +29,18 @@ public class UserController {
     public ResponseEntity<User> findUser(@PathVariable long id) {
         User user = userService.findUser(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @GetMapping(params = { "city" }, produces = { "application/json" })
+    public ResponseEntity<User> findUserByCity(@RequestParam("city") String city) {
+        User user = userService.findUserByCity(city);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @GetMapping(params = { "userName" }, produces = { "application/json" })
+    public ResponseEntity<Address> findCityByUserName(@RequestParam("userName") String userName) {
+        Address address = userService.findCityByUserName(userName);
+        return new ResponseEntity<>(address, HttpStatus.OK);
     }
 
     @PutMapping(value = "{id}", produces = { "application/json"} )

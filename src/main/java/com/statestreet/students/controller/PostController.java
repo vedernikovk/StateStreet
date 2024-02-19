@@ -2,7 +2,6 @@ package com.statestreet.students.controller;
 
 
 import com.statestreet.students.model.Post;
-import com.statestreet.students.model.Student;
 import com.statestreet.students.service.PostService;
 import com.statestreet.students.service.StudentNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -75,19 +75,30 @@ class StudentServiceImpl implements StudentService {
 
     @Override
     public List<String> findEnrolledStudents(String courseName) {
-        List result = em.createQuery("Select s.name from StudentEntity s, IN (s.courses) c Where c.name = :name Order by s.name")
+        List result = em.createQuery("Select s.name from StudentEntity s JOIN s.courses c Where c.name = :name Order by s.name")
                 .setParameter("name", courseName)
                 .getResultList();
         return result;
+
+        // Same
+        // List result = em.createQuery("Select s.name from StudentEntity s, IN (s.courses) c Where c.name = :name Order by s.name")
+        //        .setParameter("name", courseName)
+        //        .getResultList();
+        // return result;
     }
 
     @Override
     public List<String> findNotEnrolledStudents(String courseName) {
+        /*
         List<String> allStudents = (List<String>) em.createQuery("Select s.name from StudentEntity s").getResultList();
-
         List<String> courseStudents = findEnrolledStudents(courseName);
-
         allStudents.removeAll(courseStudents);
+        return allStudents;
+        */
+
+        List<String> allStudents = em.createQuery("SELECT student.name FROM StudentEntity student WHERE NOT EXISTS (SELECT s FROM StudentEntity s JOIN s.courses c WHERE c.name = :name and s = student)")
+                .setParameter("name", courseName)
+                .getResultList();
 
         return allStudents;
     }

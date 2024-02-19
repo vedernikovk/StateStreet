@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -44,18 +45,38 @@ public class UserService {
 
         result.setAddress(address);
 
-        /*
-        AddressEntity entity = em.find(AddressEntity.class, id);
+        return result;
+    }
+
+    public User findUserByCity(String city) {
+
+        // Navigation by field name in one-to-one bidirectional relationship
+        UserEntity entity = (UserEntity) em.createQuery("Select u from UserEntity u Where u.address.city = :city")
+                .setParameter("city", city).getSingleResult();
+
+        User result = new User();
+        result.setName(entity.getUserName());
+
+        Address address = new Address();
+        address.setCity(entity.getAddress().getCity());
+        address.setStreet(entity.getAddress().getStreet());
+
+        result.setAddress(address);
+
+        return result;
+    }
+
+    public Address findCityByUserName(String userName) {
+
+        // Navigation by field name in one-to-one bidirectional relationship
+        AddressEntity entity = (AddressEntity) em.createQuery("Select a from AddressEntity a Where a.user.userName = :userName")
+                .setParameter("userName", userName).getSingleResult();
 
         Address address = new Address();
         address.setCity(entity.getCity());
         address.setStreet(entity.getStreet());
 
-        result.setName(entity.getUser().getUserName());
-        result.setAddress(address);
-         */
-
-        return result;
+        return address;
     }
 
     @Transactional
